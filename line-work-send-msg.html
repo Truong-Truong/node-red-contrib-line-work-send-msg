@@ -1,26 +1,3 @@
-<script type="text/javascript">
-  RED.nodes.registerType('line-work-send-msg',{
-      category: 'LINE',
-      color: '#1ad823',
-      defaults: {
-          name: {value:"Send Message"},
-          apiid: { value: '', required: true },
-          consumerkey: { value: '', required: true},
-          token: { value: '', required: true },
-          botid: { value: '', required: true },
-          roomid: { value: '', required: false },
-          accountid: { value: '', required: false },
-          message: { value: '', required: true }
-      },
-      inputs:1,
-      outputs:1,
-      icon: "icon.png",
-      label: function() {
-          return this.name||"Send Message";
-      }
-  });
-</script>
-
 <script type="text/html" data-template-name="line-work-send-msg">
   <div class="form-row">
     <label for="node-input-name">Name</label>
@@ -38,8 +15,8 @@
     <input type="text" id="node-input-consumerkey" placeholder="Consumer Key">
   </div>
   <div class="form-row">
-    <label for="node-input-token">Token</label>
-    <input type="text" id="node-input-token" placeholder="Token">
+    <label for="node-input-serverid">ServerID</label>
+    <input type="text" id="node-input-serverid" placeholder="ServerID">
   </div>
   <div class="form-row">
     <label for="node-input-botid">Bot Id</label>
@@ -53,8 +30,51 @@
     <label for="node-input-roomid">Room Id</label>
     <input type="text" id="node-input-roomid" placeholder="Room Id">
   </div>
+  <div class="form-row">
+    <label for="node-input-privatekey">PRIVATEKEY</label>
+    <div style="height: 250px; min-height:150px;" class="node-text-editor" id="node-input-example-editor"></div>
+  </div>
 </script>
 
 <script type="text/html" data-help-name="line-work-send-msg">
   <p>A simple node that send the message to line work room</p>
+</script>
+
+<script type="text/javascript">
+  RED.nodes.registerType('line-work-send-msg',{
+      category: 'LINE',
+      color: '#1ad823',
+      defaults: {
+          name: {value:"Send Message"},
+          apiid: { value: '', required: true },
+          consumerkey: { value: '', required: true},
+          serverid: { value: '', required: true },
+          botid: { value: '', required: true },
+          roomid: { value: '', required: false },
+          accountid: { value: '', required: false },
+          privatekey: { value: '', required: false }
+      },
+      inputs:1,
+      outputs:1,
+      icon: "icon.png",
+      label: function() {
+          return this.name||"Send Message";
+      },
+      oneditprepare: function() {
+        this.editor = RED.editor.createEditor({
+          id: 'node-input-example-editor',
+          mode: 'ace/mode/text',
+          value: this.privatekey
+        });
+      },
+      oneditsave: function() {
+          this.privatekey = this.editor.getValue();
+          this.editor.destroy();
+          delete this.editor;
+      },
+      oneditcancel: function() {
+          this.editor.destroy();
+          delete this.editor;
+      },
+  });
 </script>

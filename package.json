@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-line-work-send-msg",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "node-red-contrib-line-work-send-msg",
   "main": "index.js",
   "scripts": {
@@ -23,5 +23,11 @@
   "bugs": {
     "url": "https://github.com/Truong-Truong/node-red-contrib-line-work-send-msg/issues"
   },
-  "homepage": "https://github.com/Truong-Truong/node-red-contrib-line-work-send-msg#readme"
+  "homepage": "https://github.com/Truong-Truong/node-red-contrib-line-work-send-msg#readme",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
+    "path": "^0.12.7",
+    "request": "^2.88.2"
+  }
 }
